@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import CodeEditor from './components/CodeEditor';
 import LanguageSelector from './components/LanguageSelector';
 import Sidebar from './components/Sidebar';
+import  {formatCode}  from './utils/formatter';
 import useLocalStorage from './hooks/useLocalStorage';
+import Notification from './components/Notification';
 
 const App: React.FC = () => {
   const [language, setLanguage] = useState('JS');
@@ -33,6 +35,10 @@ const App: React.FC = () => {
     setNotifications(`File "${file}" deleted successfully!`);
   };
 
+  const handleFormatCode = () => {
+    setCode(formatCode(code, language));
+  };
+
   // Handle saving with CTRL + S
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -55,7 +61,10 @@ const App: React.FC = () => {
         <button onClick={saveCode} className="ml-2 p-2 bg-blue-500 text-white rounded">
           Save
         </button>
-        <CodeEditor code={code} onCodeChange={setCode} />
+        <button onClick={handleFormatCode} className="ml-2 p-2 bg-green-500 text-white rounded">
+          Format
+        </button>
+        <CodeEditor code={code} onCodeChange={setCode} language={language} />
         {notifications && (
           <div className="mt-2 p-2 bg-green-200 text-green-800 rounded">{notifications}</div>
         )}
