@@ -7,7 +7,7 @@ interface CodeEditorProps {
   language: string;
 }
 
-const highlightSyntax = (code: string, language: string): string => {
+const highlightSyntax = (code: string): string => {
   // Basic regex-based syntax highlighting (extend as needed)
   let highlightedCode = code
     .replace(/(\/\/[^\n]*)/g, '<span class=comment>$1</span>') // Single-line comments
