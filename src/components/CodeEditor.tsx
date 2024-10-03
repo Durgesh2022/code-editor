@@ -1,31 +1,29 @@
-// src/components/CodeEditor.tsx
 import React, { useEffect, useRef, useState } from 'react';
 
 interface CodeEditorProps {
   code: string;
   onCodeChange: (code: string) => void;
-  language: string;
 }
 
-const highlightSyntax = (code: string): string => {
+const highlightSyntax = (code: string): string => { // Removed 'language'
   // Basic regex-based syntax highlighting (extend as needed)
   let highlightedCode = code
     .replace(/(\/\/[^\n]*)/g, '<span class=comment>$1</span>') // Single-line comments
     .replace(/\/\*[\s\S]*?\*\//g, '<span class=comment>$&</span>') // Multi-line comments
     .replace(/("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')/g, '<span class=string>$1</span>') // Strings
     .replace(/\b(const|let|var|function|return|if|else|for|while|switch|case|break|import|from|export)\b/g, '<span class=keyword>$1</span>') // Keywords
-    .replace(/\b(\d+)\b/g, '<span class="number">$1</span>'); // Numbers
+    .replace(/\b(\d+)\b/g, '<span class=number>$1</span>'); // Numbers
 
   return highlightedCode;
 };
 
-const CodeEditor: React.FC<CodeEditorProps> = ({ code, onCodeChange, language }) => {
+const CodeEditor: React.FC<CodeEditorProps> = ({ code, onCodeChange }) => {
   const [highlightedCode, setHighlightedCode] = useState('');
   const codeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setHighlightedCode(highlightSyntax(code, language));
-  }, [code, language]);
+    setHighlightedCode(highlightSyntax(code)); // Pass only the code argument
+  }, [code]);
 
   const handleInput = (e: React.FormEvent<HTMLDivElement>) => {
     const text = e.currentTarget.innerText;
