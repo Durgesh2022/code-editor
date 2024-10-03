@@ -64,7 +64,7 @@ const App: React.FC = () => {
         <button onClick={handleFormatCode} className="ml-2 p-2 bg-green-500 text-white rounded">
           Format
         </button>
-        <CodeEditor code={code} onCodeChange={setCode} language={language} />
+        <CodeEditor code={code} onCodeChange={setCode} />
         {notifications && (
           <div className="mt-2 p-2 bg-green-200 text-green-800 rounded">{notifications}</div>
         )}
