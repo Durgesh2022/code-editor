@@ -5,7 +5,7 @@ import LanguageSelector from './components/LanguageSelector';
 import Sidebar from './components/Sidebar';
 import  {formatCode}  from './utils/formatter';
 import useLocalStorage from './hooks/useLocalStorage';
-import Notification from './components/Notification';
+
 
 const App: React.FC = () => {
   const [language, setLanguage] = useState('JS');
